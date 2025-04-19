@@ -1,0 +1,26 @@
+import js from '@eslint/js';
+import globals from 'globals';
+import pluginReact from 'eslint-plugin-react';
+import 'eslint-config-prettier';
+import { defineConfig } from 'eslint/config';
+
+export default defineConfig([
+  // Reglas básicas de JavaScript
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    plugins: { js },
+    extends: ['js/recommended'],
+  },
+  // Variables globales del navegador
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    languageOptions: { globals: globals.browser },
+  },
+  // Reglas recomendadas de React (plugin eslint-plugin-react)
+  pluginReact.configs.recommended,
+  // Turn off ESLint rules que conflijan con Prettier
+  {
+    files: ['**/*.{js,mjs,cjs,jsx}'],
+    extends: ['prettier'],
+  },
+]);

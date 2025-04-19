@@ -1,0 +1,59 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react",
+      "react-hooks"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "no-irregular-whitespace": ["error", {
+        "skipStrings": true,
+        "skipComments": true,
+        "skipRegExps": true,
+        "skipTemplates": true
+      }]
+    },
+    "overrides": [
+      {
+        "files": ["**/__tests__/**", "**/*.test.js"],
+        "env": {
+          "jest": true
+        },
+        "rules": {
+          "no-undef": "off"
+        }
+      },
+      {
+        "files": ["**/__mocks__/**", "jest.config.js", "postcss.config.js", "tailwind.config.js"],
+        "env": {
+          "node": true
+        },
+        "rules": {
+          "no-undef": "off"
+        }
+      }
+    ]
+  }
+  
