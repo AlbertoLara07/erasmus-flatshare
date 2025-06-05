@@ -27,10 +27,14 @@ export default function FlatReservations() {
   const handleAction = async (rid, action) => {
     try {
       await axios.put(`http://localhost:5000/api/reservations/${rid}/${action}`);
-      // Refresca la lista
-      setReservations(reservations.map(r =>
-        r.id === rid ? { ...r, status: action === 'accept' ? 'aceptado' : 'denegado' } : r
-      ));
+      // Refresca la lista utilizando el estado más reciente
+      setReservations(prev =>
+        prev.map(r =>
+          r.id === rid
+            ? { ...r, status: action === 'accept' ? 'aceptado' : 'denegado' }
+            : r
+        )
+      );
     } catch (err) {
       console.error(`Error al ${action}:`, err);
     }
