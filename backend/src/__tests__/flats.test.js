@@ -1,6 +1,6 @@
 // src/__tests__/flats.test.js
 const request = require('supertest');
-const app = require('../index');
+const { app, knex } = require('../index');
 
 describe('Flats API', () => {
   let userId;
@@ -46,5 +46,9 @@ describe('Flats API', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('id', flatId);
     expect(res.body).toHaveProperty('host_id', userId);
+  });
+
+  afterAll(async () => {
+    await knex.destroy();
   });
 });

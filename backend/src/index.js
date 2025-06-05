@@ -29,6 +29,6 @@ app.use('/api', reservationsRouter(knex));
      });
    }
   
-   // Exportamos el app para testing
-   module.exports = app;
+   // Exportamos el app y knex para testing
+   module.exports = { app, knex };
 
