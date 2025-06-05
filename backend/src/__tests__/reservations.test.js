@@ -1,6 +1,6 @@
 // src/__tests__/reservations.test.js
 const request = require('supertest');
-const app = require('../index');
+const { app, knex } = require('../index');
 
 describe('Reservations API', () => {
   let userId;
@@ -76,5 +76,9 @@ describe('Reservations API', () => {
     const res = await request(app).put(`/api/reservations/${rid2}/deny`);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('status', 'denegado');
+  });
+
+  afterAll(async () => {
+    await knex.destroy();
   });
 });
