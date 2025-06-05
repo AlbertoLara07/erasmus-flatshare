@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Layout from '../components/Layout';
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -29,7 +30,8 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
+    <Layout>
+    <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded shadow">
       <h1 className="text-2xl font-bold mb-6">Registro</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -42,6 +44,7 @@ export default function Register() {
             value={form.name}
             onChange={handleChange}
             className="w-full border p-2 rounded"
+            placeholder="Tu nombre"
             required
           />
         </div>
@@ -55,6 +58,7 @@ export default function Register() {
             value={form.instagram_handle}
             onChange={handleChange}
             className="w-full border p-2 rounded"
+            placeholder="@usuario"
             required
           />
         </div>
@@ -77,10 +81,12 @@ export default function Register() {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded"
+          aria-label="Crear cuenta"
         >
           Crear cuenta
         </button>
       </form>
     </div>
+    </Layout>
   );
 }

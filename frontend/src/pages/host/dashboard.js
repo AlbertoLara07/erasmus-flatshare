@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import Layout from '../../components/Layout';
 
 export default function HostDashboard() {
   const [flats, setFlats] = useState([]);
@@ -37,22 +38,29 @@ export default function HostDashboard() {
   }, [userId]);
 
   if (loading) {
-    return <p className="text-center mt-10">Cargando tu dashboard…</p>;
+    return (
+      <Layout>
+        <p className="text-center mt-10">Cargando tu dashboard…</p>
+      </Layout>
+    );
   }
   if (!userId) {
     return (
-      <p className="text-center mt-10">
-        Debes{' '}
-        <Link href="/register" className="text-blue-500 underline">
-          registrarte
-        </Link>{' '}
-        para ver tu dashboard.
-      </p>
+      <Layout>
+        <p className="text-center mt-10">
+          Debes{' '}
+          <Link href="/register" className="text-blue-500 underline">
+            registrarte
+          </Link>{' '}
+          para ver tu dashboard.
+        </p>
+      </Layout>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 px-4">
+    <Layout>
+    <div className="max-w-2xl mx-auto mt-6">
       <h1 className="text-3xl font-bold text-center mb-6">Tu Dashboard de Anfitrión</h1>
       {flats.length === 0 ? (
         <p className="text-center">No has publicado ningún piso aún.</p>
@@ -70,5 +78,6 @@ export default function HostDashboard() {
         ))
       )}
     </div>
+    </Layout>
   );
 }
