@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Layout from '../../../components/Layout';
 
 export default function FlatReservations() {
   const router = useRouter();
@@ -36,10 +37,16 @@ export default function FlatReservations() {
     }
   };
 
-  if (loading) return <p className="text-center mt-10">Cargando reservas…</p>;
+  if (loading)
+    return (
+      <Layout>
+        <p className="text-center mt-10">Cargando reservas…</p>
+      </Layout>
+    );
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 px-4">
+    <Layout>
+    <div className="max-w-2xl mx-auto mt-6">
       <h1 className="text-3xl font-bold text-center mb-6">Reservas para piso #{id}</h1>
       {reservations.length === 0 ? (
         <p className="text-center">No hay reservas todavía.</p>
@@ -53,12 +60,14 @@ export default function FlatReservations() {
               <div className="mt-2 space-x-2">
                 <button
                   onClick={() => handleAction(r.id, 'accept')}
+                  aria-label="Aceptar reserva"
                   className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded"
                 >
                   Aceptar
                 </button>
                 <button
                   onClick={() => handleAction(r.id, 'deny')}
+                  aria-label="Denegar reserva"
                   className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
                 >
                   Denegar
@@ -69,5 +78,6 @@ export default function FlatReservations() {
         ))
       )}
     </div>
+    </Layout>
   );
 }

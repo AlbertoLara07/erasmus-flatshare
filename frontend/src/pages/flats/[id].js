@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Layout from '../../components/Layout';
 
 export default function FlatDetail() {
   const router = useRouter();
@@ -48,11 +49,22 @@ export default function FlatDetail() {
   };
   
 
-  if (loading) return <p className="text-center mt-10">Cargando...</p>;
-  if (!flat) return <p className="text-center mt-10">Piso no encontrado.</p>;
+  if (loading)
+    return (
+      <Layout>
+        <p className="text-center mt-10">Cargando...</p>
+      </Layout>
+    );
+  if (!flat)
+    return (
+      <Layout>
+        <p className="text-center mt-10">Piso no encontrado.</p>
+      </Layout>
+    );
 
   return (
-  <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
+  <Layout>
+  <div className="max-w-xl mx-auto mt-6 p-6 bg-white rounded shadow">
   <h1 className="text-2xl font-bold mb-4">{flat.title}</h1>
   <p className="mb-2">{flat.description}</p>
   <p className="mb-2">Precio: {flat.price} € / mes</p>
@@ -70,10 +82,12 @@ export default function FlatDetail() {
   <button
     onClick={handleReserve}
     disabled={reserving}
+    aria-label="Reservar plaza"
     className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded"
   >
     {reserving ? 'Enviando reserva…' : 'Reservar plaza'}
   </button>
 </div>
+  </Layout>
   );
 }

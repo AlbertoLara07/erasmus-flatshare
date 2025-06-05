@@ -14,4 +14,3 @@ exports.createUser = async (knex, req, res) => {
       res.status(500).json({ error: 'Error al crear usuario' });
     }
   };
-  

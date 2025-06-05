@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import FlatList from '../components/FlatList';
+import Layout from '../components/Layout';
 
 export default function FlatsPage() {
   const [flats, setFlats] = useState([]);
@@ -22,13 +23,17 @@ export default function FlatsPage() {
   }, []);
 
   if (loading) {
-    return <p className="text-center mt-10">Cargando pisos…</p>;
+    return (
+      <Layout>
+        <p className="text-center mt-10">Cargando pisos…</p>
+      </Layout>
+    );
   }
 
   return (
-    <div className="px-4">
-      <h1 className="text-3xl font-bold text-center mt-10">Pisos disponibles</h1>
+    <Layout>
+      <h1 className="text-3xl font-bold text-center mt-4">Pisos disponibles</h1>
       <FlatList flats={flats} />
-    </div>
+    </Layout>
   );
 }
